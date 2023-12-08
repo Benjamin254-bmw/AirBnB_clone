@@ -65,7 +65,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
     def test_instantiation_with_kwargs(self):
         dte = datetime.today()
         dte_iso = dte.isoformat()
-        bm = BaseModel(id=None, bm.__dict__.values())
+        bm = BaseModel(id="345", created_at=dte_iso, updated_at=dte_iso)
         self.assertEqual(bm.id, "345")
         self.assertEqual(bm.created_at, dte)
         self.assertEqual(bm.updated_at, dte)
@@ -144,7 +144,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
         bm = BaseModel()
         self.assertIn("id", bm.to_dict())
         self.assertIn("created_at", bm.to_dict())
-        self.assertIn("updated_at", b,.to_dict())
+        self.assertIn("updated_at", bm.to_dict())
         self.assertIn("__class__", bm.to_dict())
 
     def test_to_dict_contains_added_attributes(self):
@@ -167,23 +167,20 @@ class TestBaseModel_to_dict(unittest.TestCase):
         bm.created_at = bm.updated_at = dte
         tdict = {
                 'id': '123456',
-                '__class__': 'BaseModel',                
-                'created_at': dt.isoformat()                
-                'updated_at': dt.isoformat()                
+                '__class__': 'BaseModel',
+                'created_at': dt.isoformat(),
+                'updated_at': dt.isoformat()
         }
         self.assertDictEqual(bm.to_dict(), tdict)
 
     def test_constrast_to_dict_dunder_dict(self):
         bm = BaseModel()
-        self.assertNotEqual(bm.to_dict()), tdict)
-
+        self.assertNotEqual(bm.to_dict(), bm.__dict__)
+        
     def test_to_dict_with_arg(self):
         bm = BaseModel()
         with self.assertRaises(TypeError):
             bm.to_dict(None)
 
-    if__name__ == "__main__":
-        unittest.main()
-
-
-
+if __name__ == "__main__":
+    unittest.main
