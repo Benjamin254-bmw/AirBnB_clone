@@ -9,7 +9,7 @@ unittest classes:
 
 import os
 import models
-import unnittest
+import unittest
 from datetime import datetime
 from time import sleep
 from models.base_model import BaseModel
@@ -82,7 +82,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertEqual(bm.created_at, dt)
         self.assertEqual(bm.updated_at)
 
-class TestBaseModel_save(unittest>TestCase):
+class TestBaseModel_save(unittest.TestCase):
     """unittest for testing the save method of the BaseModel class"""
 
     @classmethod
